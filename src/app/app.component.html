@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar sticky">
+  <ul class="ul-nav">
+    <li class="nav-logo" style="text-align: center">eBrary</li>
+    <li class="nav-section"><a routerLink="search/">Search</a></li>
+    <li class="nav-section"><a routerLink="library/">Library</a></li>
+    <li class="nav-section"><a routerLink="dashboard/">Dashboard</a></li>
+    <li class="nav-section">
+      <a (click)="authService.SignOut()">
+        <i class="fas fa-sign-out-alt"></i>Log out
+      </a>
+    </li>
+  </ul>  
+</nav>
+
+<router-outlet></router-outlet>

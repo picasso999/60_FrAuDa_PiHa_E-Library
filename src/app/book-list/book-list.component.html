@@ -1,0 +1,10 @@
+<div ng-href="" class="book-card my-animation" *ngFor="let book of googleBooksService.books" (click)="show(book)">
+  <img class="book-img" src={{book.thumbnail}} alt="book-image">
+  <div class="book-container">
+      <p>{{book.title}}</p>
+  </div>
+</div>
+
+<!-- Custom modal setup -->
+<div id="modal-container" class="hidden"></div>
+<div id="overlay" (click)="modalService.destroy()" class="hidden" ></div>

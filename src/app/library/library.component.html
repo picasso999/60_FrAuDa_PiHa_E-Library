@@ -1,0 +1,61 @@
+<div class="container color-light">
+    <div class="subtitle-section color-dark">
+        <span class="subtitle">My eBrary</span>
+    </div>
+    <div class="container-nav">
+      <form class="form-inline" (ngSubmit)="search(searchBox.value, 13)">
+        <p>Looking for an specific book? (v2.0)</p>
+        <div class="form-group">
+          <input #searchBox
+                 id="search-box"
+                 (keyup)="search(searchBox.value, $event.keyCode)"
+                 type="search"
+                 class="txt form-control"
+                 placeholder="Search..."
+                 name="search"
+                 autocomplete="off"
+                 value="{{inputContent}}"
+                 required
+                 />
+          <ul class="search-result" (clickOutside)="closeAutocomplete()">
+            <li *ngFor="let book of books$ | async  | slice:0:10;" (click)="specificSearch(book.title)" >
+              {{book.title}}
+            </li>
+          </ul>
+        </div>
+        <button type="submit"
+                class="btn"
+                (click)="filter(searchBox.value)">
+          Search
+        </button>
+        <button type="submit" class="btn" (click)="clearFilter()" style="background-color: rgb(255, 206, 116);">
+          Clear Filter
+        </button>
+      </form>
+    </div>
+    <hr />
+    <div class="container-nav" style="padding-top: 13px">
+      <div class="text-center" *ngIf="libraryService.myBooks.length == 0">
+        <!-- TODO: Show when library is empty -->
+        <p class="suggestion">Your library is actually empty. Try </p>
+        <a class="link" routerLink="/search/">Searching new eBooks!</a>
+      </div>
+
+      <div ng-href="" class="book-card my-animation" *ngFor="let book of libraryService.filteredBooks" (click)="show(book)">
+        <img class="book-img" src={{book.thumbnail}} alt="book-image">
+        <div class="book-container">
+            <p>{{book.title}}</p>
+        </div>
+      </div>
+  
+      <div class="d-flex justify-content-center">
+        <!-- TODO: Show pagnation -->
+        <app-pager *ngIf="searchFinish">
+        </app-pager>
+      </div>
+  </div>  
+</div>
+
+<!-- Custom modal setup -->
+<div id="modal-container" class="hidden"></div>
+<div id="overlay" (click)="modalService.destroy()" class="hidden" ></div>
